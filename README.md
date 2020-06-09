@@ -20,6 +20,11 @@ This project is licensed under the [Apache License, Version 2.0](https://www.apa
 
 # Building
 
+This library uses the Boost library.
+
+    export LDFLAGS="$LDFLAGS -L/path/to/boost/lib"
+    export CPPFLAGS="$CPPFLAGS -I/path/to/boost/include"
+
 pph uses CMake for its build system.
 
     mkdir build
@@ -49,4 +54,20 @@ If a hash function is not generated, you can try sorting the input file:
     sort --numeric-sort --key=2 file_index.txt > file_sorted_index.txt
     awk -F' ' '{print $1}'  file_sorted_index.txt > file_sorted.txt
 
-The file containing the hash function can be read by another program to generate code for other programming languages (TODO).
+
+# Python
+
+This library uses the Boost library. Install the Boost library and set **LDFLAGS** and **CPPFLAGS** before installing the Python module.
+
+    export LDFLAGS="$LDFLAGS -L/path/to/boost/lib"
+    export CPPFLAGS="$CPPFLAGS -I/path/to/boost/include"
+    
+Install the module.
+
+    pip3 install pph
+
+Import the module.
+
+    from pph import PphHashTable, PphRandomNumber, PphKeyFunctions
+
+See the tests for how to generate a hash function using the Python interface.    

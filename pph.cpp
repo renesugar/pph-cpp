@@ -40,10 +40,6 @@
 #include <memory>
 #include <string>
 
-// TODO(renesugar): Write a program to read generated hash table file and
-//                  output hash table and functions in various languages.
-//
-
 #define STR(x) #x
 #define STR_(x) STR(x)
 #define STR__LINE__ STR_(__LINE__)

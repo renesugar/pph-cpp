@@ -829,6 +829,7 @@ public:
     bool status = true;
 
     keys_.reserve(keys.size());
+    keys_.resize(keys.size());
 
     for (uint64_t i = 0; i < keys.size(); i++) {
       keys_[i] = keys[i];

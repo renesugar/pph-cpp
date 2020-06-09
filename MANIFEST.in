@@ -1,0 +1,27 @@
+# Exclude everything by default
+exclude *
+recursive-exclude * *
+
+include MANIFEST.in
+include LICENSE.md
+include README.md
+include setup.cfg
+include setup.py
+include requirements.txt
+include pph.h
+include XorShift1024Star.h
+include fnv64a_hash.h
+include SpookyV2.h
+include bitScanForward.h
+include bitScanReverse.h
+include GcdBinary.h
+include PrimeNumber.h
+include PowerOfTwo.h
+include StringUtil.h
+include pypph.h
+
+graft pybind11
+
+global-exclude __pycache__
+global-exclude *.py[co]
+global-exclude .DS_Store
