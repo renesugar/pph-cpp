@@ -3,8 +3,10 @@ from setuptools.command.build_ext import build_ext
 import sys
 import setuptools
 
-__version__ = '0.1.0'
+__version__ = '0.2.0'
 
+with open("README.md", "r") as fh:
+  long_description = fh.read()
 
 class get_pybind_include(object):
     """Helper class to determine the pybind11 include path
@@ -109,7 +111,8 @@ setup(
     author_email='rene.sugar@gmail.com',
     url='https://github.com/renesugar/pph-cpp',
     description='Practical Perfect Hashing module',
-    long_description='',
+    long_description=long_description,
+    long_description_content_type="text/markdown",
     ext_modules=ext_modules,
     setup_requires=['pybind11>=2.5.0'],
     cmdclass={'build_ext': BuildExt},

@@ -28,16 +28,6 @@ private:
     const size_t buf_size;
     std::unique_ptr<char[]> d_buffer;
     object pyreadinto;
-    object pywrite;
-    object pyflush;
-
-    int overflow(int c) {
-        if (!traits_type::eq_int_type(c, traits_type::eof())) {
-            *pptr() = traits_type::to_char_type(c);
-            pbump(1);
-        }
-        return sync() == 0 ? traits_type::not_eof(c) : traits_type::eof();
-    }
 
     int underflow() {
         if (this->gptr() == this->egptr()) {
@@ -60,38 +50,18 @@ private:
              : std::char_traits<char>::to_int_type(*this->gptr());
     }
 
-    int sync() {
-        if (pbase() != pptr()) {
-            // This subtraction cannot be negative, so dropping the sign
-            str line(pbase(), static_cast<size_t>(pptr() - pbase()));
-
-            {
-                gil_scoped_acquire tmp;
-                pywrite(line);
-                pyflush();
-            }
-
-            setp(pbase(), epptr());
-        }
-        return 0;
-    }
-
 public:
 
     ipythonbuf(object pystream, size_t buffer_size = 1024)
         : buf_size(buffer_size),
           d_buffer(new char[buf_size]),
-          pyreadinto(pystream.attr("readinto")),
-          pywrite(pystream.attr("write")),
-          pyflush(pystream.attr("flush")) {
+          pyreadinto(pystream.attr("readinto")) {
         setp(d_buffer.get(), d_buffer.get() + buf_size - 1);
     }
 
     ipythonbuf(ipythonbuf&&) = default;
 
-    /// Sync before destroy
     ~ipythonbuf() {
-        sync();
     }
 };
 

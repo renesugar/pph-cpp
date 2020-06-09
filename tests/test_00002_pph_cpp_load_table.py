@@ -912,9 +912,7 @@ def test_00002():
   status = mydict.load(stream)
 
   if status == True:
-    keys = mydict.keys
-    keys.sort()
-    for key in keys:
+    for key in mydict.keys:
       expected_keywords += key + "\n"
   else:
     print("Loading hash table failed.")

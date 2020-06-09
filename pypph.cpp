@@ -168,7 +168,7 @@ bool PphHashTable::load(py::object pystream) {
     return false;
   }
   this->m_initialized = true;
-  if (!(py::hasattr(pystream, "readinto") && py::hasattr(pystream, "write") && py::hasattr(pystream, "flush"))) {
+  if (!(py::hasattr(pystream, "readinto"))) {
       throw py::type_error("PphHashTable::load(pystream): incompatible function argument:  `pystream` must be a file-like object, but `"
                           + (std::string)(py::repr(pystream)) + "` provided");
   }
@@ -276,8 +276,8 @@ PYBIND11_MODULE(pph, m) {
     .def("initialize", &PphHashTable::initialize)
     ;
 
-  m.attr("__version__") = py::make_tuple(0, 1, 0, "alpha", 0);
-  m.attr("__version__") = "0.1.0";
+  m.attr("__version__") = py::make_tuple(0, 2, 0, "alpha", 0);
+  m.attr("__version__") = "0.2.0";
   m.attr("__author__")  = "Rene Sugar";
   m.attr("__email__")   = "rene.sugar@gmail.com";
 }
